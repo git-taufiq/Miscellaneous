@@ -10,9 +10,9 @@ def find_nearest_vector(array, value):
 
 # parsing python arguments
 import argparse
-parser = argparse.ArgumentParser(description='find closest fault triangle center from receiver')
-parser.add_argument('--fault',nargs=1, help='fault hdf5 filename')
-parser.add_argument('--receivers',nargs=1, help='fault receveiver filename (ascii)')
+parser = argparse.ArgumentParser(description='find closest surface triangle center from receiver')
+parser.add_argument('--surface',nargs=1, help='surface hdf5 filename')
+parser.add_argument('--receiver',nargs=1, help='receiver ascii filename')
 args = parser.parse_args()
 
 # Read Hdf5i
