@@ -8,14 +8,14 @@ def find_nearest_vector(array, value):
    idx = np.array([np.linalg.norm(x[0:3]-value[0:3]) for x in array]).argmin()
    return array[idx]
 
-# parsing python arguments
+# Parsing python arguments
 import argparse
 parser = argparse.ArgumentParser(description='find closest surface triangle center from receiver')
 parser.add_argument('--surface',nargs=1, help='surface hdf5 filename')
 parser.add_argument('--receiver',nargs=1, help='receiver ascii filename')
 args = parser.parse_args()
 
-# Read Hdf5i
+# Read Hdf5
 from pythonXdmfReader import *
 xdmfFilename = args.fault[0]
 faultxyz = ReadGeometry(xdmfFilename)
