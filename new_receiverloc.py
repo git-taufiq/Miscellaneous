@@ -17,20 +17,19 @@ args = parser.parse_args()
 
 # Read Hdf5
 from pythonXdmfReader import *
-xdmfFilename = args.fault[0]
-faultxyz = ReadGeometry(xdmfFilename)
+xdmfFilename = args.surface[0]
+surfacexyz = ReadGeometry(xdmfFilename)
 connect = ReadConnect(xdmfFilename)
 
-centers = (faultxyz[connect[:,0]] + faultxyz[connect[:,1]] + 
-faultxyz[connect[:,2]])/3.
+centers = (surfacexyz[connect[:,0]] + surfacexyz[connect[:,1]] + surfacexyz[connect[:,2]])/3.
 
-FidReceivers = args.receivers[0]
-FidReceiversnew = args.receivers[0]+'2'
-Receivers = np.loadtxt(FidReceivers)
-FidReceiversnew = FidReceivers+'2'
-fout = open(FidReceiversnew,'w')
+FidReceiver = args.receiver[0]
+FidReceivernew = args.receiver[0]+'2'
+Receiver = np.loadtxt(FidReceiver)
+FidReceivernew = FidReceiver+'2'
+fout = open(FidReceivernew,'w')
 
-for rec in Receivers:
+for rec in Receiver:
     print(rec)
     newrec = find_nearest_vector(centers, rec)
     fout.write("%f %f %f\n" %(newrec[0],newrec[1],newrec[2]))
