@@ -2,9 +2,6 @@ import h5py
 import numpy as np
 
 def find_nearest_vector(array, value):
-   #idx = np.array([np.linalg.norm(x-value) for x in array]).argmin()
-   #id30 = np.where(array[:,2]>-30e3)
-   #array = array[id30]
    idx = np.array([np.linalg.norm(x[0:3]-value[0:3]) for x in array]).argmin()
    return array[idx]
 
