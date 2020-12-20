@@ -22,12 +22,19 @@ centers = (surfacexyz[connect[:,0]] + surfacexyz[connect[:,1]] + surfacexyz[conn
 
 FidReceiver = args.receiver[0]
 FidReceivernew = args.receiver[0]+'2'
+
 Receiver = np.loadtxt(FidReceiver)
 FidReceivernew = FidReceiver+'2'
 fout = open(FidReceivernew,'w')
 
-for rec in Receiver:
-    print(rec)
-    newrec = find_nearest_vector(centers, rec)
-    fout.write("%f %f %f\n" %(newrec[0],newrec[1],newrec[2]))
+from scipy import spatial
+tree = spatial.KDTree(centers)
+dist, ids = tree.query(Receiver[:,:])
+
+print(Receiver)
+for k, rec in enumerate(Receiver):
+        print(rec)
+        newrec = find_nearest_vector(centers, rec)
+        newrec=centers[ids[k]]
+        fout.write("%f %f %f\n" %(newrec[0],newrec[1],newrec[2]))
 fout.close()
